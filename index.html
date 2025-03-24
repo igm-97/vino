@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cabernet Franc | Elegancia en cada copa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cinzel:wght@500&display=swap" rel="stylesheet">
+    <style>
+        /* RESET & VARIABLES */
+        :root {
+            --color-primary: #800020; /* Borgoña */
+            --color-secondary: #D4AF37; /* Dorado */
+            --color-dark: #0a0a0a; /* Negro */
+            --color-light: #f5f5f5; /* Blanco roto */
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Playfair Display', serif;
+            background-color: var(--color-dark);
+            color: var(--color-light);
+            transition: background-color 0.5s ease;
+            overflow-x: hidden;
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            text-align: center;
+            flex-direction: column;
+        }
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Cinzel', serif;
+            position: relative;
+            z-index: 2;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), 
+                        transparent 10%, 
+                        rgba(128, 0, 32, 0.3) 70%);
+            z-index: 1;
+            pointer-events: none;
+            transition: background 0.3s ease;
+        }
+
+        /* BOTÓN ELEGANTE */
+        .btn {
+            background: transparent;
+            color: var(--color-light);
+            border: 1px solid var(--color-secondary);
+            padding: 12px 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 2;
+            letter-spacing: 1px;
+        }
+        .btn:hover {
+            background: var(--color-secondary);
+            color: var(--color-dark);
+        }
+
+        /* SECCIÓN HISTORIA */
+        .historia {
+            background: linear-gradient(to right, var(--color-dark) 50%, 
+                        rgba(128, 0, 32, 0.1));
+            clip-path: polygon(0 10%, 100% 0, 100% 90%, 0 100%);
+        }
+        .historia h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: var(--color-secondary);
+        }
+        .historia p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 700px;
+        }
+
+        /* EFECTO DE COLOR DINÁMICO */
+        .color-change {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.7;
+            background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), 
+                        var(--color-primary), 
+                        var(--color-dark) 70%);
+            transition: background 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="color-change"></div>
+        <h1>Cabernet Franc</h1>
+        <p>Un vino que captura la esencia de la tierra y la tradición, elaborado con uvas seleccionadas en los viñedos de Mendoza.</p>
+        <button class="btn">Descubrir colección</button>
+    </section>
+
+    <!-- SECCIÓN HISTORIA -->
+    <section class="historia">
+        <div class="color-change"></div>
+        <div class="content">
+            <h2>Nuestra Historia</h2>
+            <p>Desde 1985, nuestra familia ha cultivado el Cabernet Franc con pasión y respeto por el terroir. Cada botella es un tributo a los sabores auténticos y la artesanía vinícola.</p>
+        </div>
+    </section>
+
+    <script>
+        // EFECTO DE COLOR DINÁMICO CON MOVIMIENTO DEL MOUSE
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+            
+            // Actualizar posición del gradiente
+            document.documentElement.style.setProperty('--mouse-x', `${x}px`);
+            document.documentElement.style.setProperty('--mouse-y', `${y}px`);
+            
+            // Cambiar colores basados en la posición
+            const primaryHue = 340 + (x / window.innerWidth * 40); // Rojo oscuro a borgoña
+            const secondaryHue = 45 + (y / window.innerHeight * 10); // Dorado cálido
+            
+            document.documentElement.style.setProperty('--color-primary', `hsl(${primaryHue}, 100%, 25%)`);
+            document.documentElement.style.setProperty('--color-secondary', `hsl(${secondaryHue}, 70%, 50%)`);
+        });
+
+        // EFECTO SCROLL SUAVE PARA BOTÓN
+        document.querySelector('.btn').addEventListener('click', () => {
+            document.querySelector('.historia').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        });
+    </script>
+</body>
+</html>
